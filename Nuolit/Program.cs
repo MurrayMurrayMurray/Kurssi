@@ -1,44 +1,83 @@
 ﻿namespace Nuolit
 {
-    enum K
+    public enum K
     {
         puu = 3,
         ruoste = 5,
         kivi = 50,
-        
-        
+
+
     }
-    enum P
+    public enum S
     {
-        lehti = 0,
-        ruostekärki = 1,
-        Nahka = 5
+        lehti = 1,
+        kalanevä = 3,
+        fasaaninsulka = 5
     }
     internal class Program
     {
+
+
+
+
+        // public float hinta = 0;
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.Red;
-            bool OikeaVastaus = false;
-            int MAX = 100;
-            int MIN = 0;
+            K ValittuKärki = K.puu;
+            S ValittuSulka = S.lehti;
+            int pituus = 0;
+
+            /* float kokonaishinta = 0;
             
-            Console.WriteLine("Nuolen pituus? (60 - 100 cm)");
-           
-            while (!OikeaVastaus) { 
+              */
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Valitse kärki (Puu, Ruoste, Kivi)");
+            string kärkisyöte = Console.ReadLine().ToLower();
+            if (kärkisyöte == "kivi") ValittuKärki = K.kivi;
+            else if (kärkisyöte == "ruoste") ValittuKärki = K.ruoste;
 
-                
-                string[] Kärjet = Enum.GetNames<K>();
-                
-                Console.WriteLine("Kärkien vaihtoehdot:");
-                for (int i = 0; i < Kärjet.Length; i++ )
-                    {
-                    Console.Write($" {Kärjet [i]},");
-                
 
-                int Kärkivastaus = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Valitse sulka (Lehti, Kalanevä, fasaaninsulka)");
+            string sulkasyöte = Console.ReadLine().ToLower();
+            if (sulkasyöte == "kalanevä") ValittuSulka = S.kalanevä;
+            else if (sulkasyöte == "fasaaninsulka") ValittuSulka = S.fasaaninsulka;
+
+
+
+            bool Oikein = false;
+
+            // kysyy nuolen pituuden
+
+            while (!Oikein)
+            {
+                Console.WriteLine("Nuolen pituus? (60 - 100 cm)");
+
+                pituus = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+                if (pituus >= 60 && pituus <= 100)
+                {
+
+                    Oikein = true;
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Ei tuon mittaista saa ostaa?");
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
 
+            }
+                float kokonaishinta = (float)ValittuKärki + (float)ValittuSulka + (pituus * 0.05f);
+
+
+                Console.WriteLine($"Nuolen pituus on {pituus} cm");
+                Console.WriteLine($"Kärki: {ValittuKärki}, Sulka: {ValittuSulka}");
+                Console.WriteLine($"Koko nuolen hinta: {kokonaishinta} kultarahaa");
+
+            
 
 
 
@@ -48,37 +87,7 @@
 
 
 
-
-
-
-
-                int Perä = Convert.ToInt32(Console.ReadLine());
-
-
-
-
-            int Pituus = Convert.ToInt32(Console.ReadLine());
-
-
-
-
-                if (Pituus >= 60 && Pituus <= 100)
-                {
-                OikeaVastaus = true;
-                Console.WriteLine((Pituus * 0.05) + " Kultarahaa");
-                }
-               else
-                {
-                Console.WriteLine("Ei tuon mittaista saa ostaa? sano toinen luku (60 - 100)");
-                 }
-
-
-
-
-
-
-
-                                    }
+            // }
         }
     }
 }
